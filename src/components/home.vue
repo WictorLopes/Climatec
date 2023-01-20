@@ -121,7 +121,7 @@
           />
         </svg>
 
-        <div class="textSaude" style="left:80px">
+        <div class="textSaude" style="left: 80px;">
           <span style="font-size: 18px;">{{ status_health }}</span>
           <span style="font-size: 10px;">Saúde do sensor</span>
         </div>
@@ -265,6 +265,7 @@ input::-webkit-input-placeholder {
   top: 275px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 .blockTemp {
   margin-left: 200px;
@@ -280,6 +281,7 @@ input::-webkit-input-placeholder {
   top: 470px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 .blockSaude {
   position: absolute;
@@ -296,6 +298,7 @@ input::-webkit-input-placeholder {
   top: 125px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 .blockUltimoRegistro {
   position: absolute;
@@ -312,6 +315,7 @@ input::-webkit-input-placeholder {
   top: 130px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 .blockHistorico {
   position: absolute;
