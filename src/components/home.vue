@@ -789,7 +789,7 @@ export default {
         console.log(error)
         axios
           .get(
-            'https://api.openweathermap.org/data/2.5/weather?lat=-8.0539&lon=-34.8811&lang=pt&units=metric&appid=cc2847e85b696ef29e3580bf28aed600',
+            'https://api.openweathermap.org/data/2.5/weather?lat=-8.0403&lon=-34.5500&lang=pt&units=metric&appid=cc2847e85b696ef29e3580bf28aed600',
           )
           .then((res) => {
             console.log('novo', res.data)
