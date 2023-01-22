@@ -564,7 +564,7 @@
       </svg>
 
       <div style="display: flex; flex-direction: column;">
-        <span style="font-size: 30px;">{{ this.tempLocal }}°C</span>
+        <span style="font-size: 30px;">{{ Math.floor(this.tempLocal) }}°C</span>
         <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
       </div>
     </div>
