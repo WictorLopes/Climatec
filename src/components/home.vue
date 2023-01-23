@@ -61,7 +61,7 @@
     <div class="blocks">
       <div class="blockStatus" v-if="this.status === 'Ativo'">
         <img
-          style="top: 155px; position: absolute; left: 230px;"
+          style="margin-bottom: 110px; margin-left: 10px;"
           src="..\assets\icones\ativo.png"
         />
 
@@ -72,7 +72,7 @@
       </div>
       <div class="blockStatus" v-else>
         <img
-          style="top: 155px; position: absolute; left: 230px;"
+          style="margin-bottom: 110px; margin-left: 10px;"
           src="..\assets\icones\inativo.png"
         />
 
@@ -83,7 +83,7 @@
       </div>
       <div class="blockTemp">
         <img
-          style="top: 350px; position: absolute; left: 230px;"
+          style="margin-bottom: 110px; margin-left: 10px;"
           src="..\assets\icones\temp.png"
         />
 
@@ -94,7 +94,7 @@
       </div>
       <div class="blockSaude" v-if="this.status_health === 'Ok'">
         <img
-          style="position: absolute; top: 8px; left: 14px;"
+          style="margin-bottom: 110px; margin-left: 10px;"
           src="..\assets\icones\saudeOK.png"
         />
 
@@ -105,7 +105,7 @@
       </div>
       <div class="blockSaude" v-else>
         <img
-          style="position: absolute; top: 8px; left: 14px;"
+          style="margin-bottom: 110px; margin-left: 10px;"
           src="..\assets\icones\inoperante.png"
         />
 
@@ -116,7 +116,7 @@
       </div>
       <div class="blockUltimoRegistro">
         <img
-          style="position: absolute; top: 8px; left: 14px;"
+          style="margin-bottom: 110px; margin-left: 10px;"
           src="..\assets\icones\historico.png"
         />
 
@@ -127,23 +127,14 @@
       </div>
       <div class="blockHistorico">
         <span style="font-size: 18px;">Histórico de Temperaturas</span>
-        <div
-          style="
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-          "
-        >
+        <div style="display: flex;">
           <li
             style="font-size: 12px;"
             v-for="item in this.historico"
             :key="item.id"
           >
             {{ item.temp_degrees }}
-            <img
-              style="margin-top: 10px;"
-              src="..\assets\icones\historicoTemp.png"
-            />
+            <img src="..\assets\icones\historicoTemp.png" />
           </li>
         </div>
       </div>
@@ -199,7 +190,6 @@ export default {
         this.tempLocalCode = res.data.data[0].weather.code
         this.dateNow = new Date()
         this.hourNow = this.dateNow.getHours()
-
       })
       .catch((error) => {
         console.log(error)
@@ -253,6 +243,8 @@ input::-webkit-input-placeholder {
   align-content: space-between;
 }
 .blockStatus {
+  display: flex;
+  align-items: center;
   margin-left: 200px;
   width: 175px;
   height: 168px;
@@ -260,14 +252,15 @@ input::-webkit-input-placeholder {
   background-color: #2e3a59;
 }
 .textStatus {
-  left: 300px;
-  position: absolute;
-  top: 275px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 40px;
 }
 .blockTemp {
+  display: flex;
+  align-items: center;
   margin-left: 200px;
   margin-top: 25px;
   width: 175px;
@@ -276,14 +269,15 @@ input::-webkit-input-placeholder {
   background-color: #2e3a59;
 }
 .textTemp {
-  left: 310px;
-  position: absolute;
-  top: 470px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 60px;
 }
 .blockSaude {
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 147px;
   margin-left: 440px;
@@ -293,14 +287,15 @@ input::-webkit-input-placeholder {
   background-color: #2e3a59;
 }
 .textSaude {
-  left: 92px;
-  position: absolute;
-  top: 125px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 40px;
 }
 .blockUltimoRegistro {
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 340px;
   margin-left: 440px;
@@ -310,12 +305,11 @@ input::-webkit-input-placeholder {
   background-color: #2e3a59;
 }
 .textUltimoRegistro {
-  left: 80px;
-  position: absolute;
-  top: 130px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 35px;
 }
 .blockHistorico {
   position: absolute;
