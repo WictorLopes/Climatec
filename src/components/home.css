@@ -1,0 +1,298 @@
+li {
+  list-style-type: none;
+}
+.header {
+  display: flex;
+  margin: 0px 80px 0px 80px;
+  align-items: center;
+  justify-content: space-between;
+}
+.searchbar {
+  width: 300px;
+  height: 33px;
+  background: #1e1e1e;
+  border-radius: 40px;
+  background-image: url('../assets/lupa.png');
+  background-repeat: no-repeat;
+  background-position: left 2px center;
+  background-size: 25px;
+}
+input::-webkit-input-placeholder {
+  position: relative;
+  left: 40px;
+}
+.AddDevice {
+  width: 300px;
+  height: 33px;
+  background: #1e1e1e;
+  border-radius: 40px;
+  background-repeat: no-repeat;
+  background-position: left 2px center;
+  background-size: 25px;
+  color: #ffffff;
+  border: none;
+  padding-left: 15px;
+}
+.blocks {
+  margin-top: 135px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+.blockStatus {
+  display: flex;
+  align-items: center;
+  margin-left: 200px;
+  width: 175px;
+  height: 168px;
+  border-radius: 20px;
+  background-color: #2e3a59;
+}
+.textStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 40px;
+}
+.blockTemp {
+  display: flex;
+  align-items: center;
+  margin-left: 200px;
+  margin-top: 25px;
+  width: 175px;
+  height: 168px;
+  border-radius: 20px;
+  background-color: #2e3a59;
+}
+.textTemp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 60px;
+}
+.blockSaude {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 275px;
+  margin-left: 410px;
+  width: 175px;
+  height: 168px;
+  border-radius: 20px;
+  background-color: #2e3a59;
+}
+.textSaude {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 40px;
+}
+.blockUltimoRegistro {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 468px;
+  margin-left: 410px;
+  width: 175px;
+  height: 168px;
+  border-radius: 20px;
+  background-color: #2e3a59;
+}
+.textUltimoRegistro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 110px;
+  margin-left: 35px;
+}
+.blockHistorico {
+  position: absolute;
+  top: 275px;
+  margin-left: 627px;
+  width: 374px;
+  height: 109px;
+  border-radius: 20px;
+  background-color: #2e3a59;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+}
+.selectDevice {
+  color: #ffffff;
+  position: absolute;
+  width: 415.32px;
+  height: 61.58px;
+  left: 214px;
+  top: 157.71px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  border: none;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.modal-content {
+  background-color: #2e3a59;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+}
+.blockEmergencia {
+  position: absolute;
+  width: 490px;
+  height: 79px;
+  left: 878px;
+  top: 149px;
+  display: flex;
+  padding-right: 15px;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  background: #1e1e1e;
+  border-radius: 12px;
+}
+.emergenciaSquare {
+  position: absolute;
+  width: 53px;
+  height: 47px;
+  left: 23px;
+  top: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b2a2a;
+  border-radius: 4px;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.roundHome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 240px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundCamera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 335px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundTelefone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 430px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundPlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 525px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundConfig {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 620px;
+  border-radius: 50%;
+  background: #505050;
+}
