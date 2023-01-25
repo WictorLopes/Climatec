@@ -63,12 +63,78 @@
       </div>
     </header>
     <body>
-      <div>
-        <select
-          v-model="deviceSelected"
-          v-bind:value="deviceSelected"
-          class="selectDevice"
+      <div class="leftMenu">
+        <div
+          class="roundHome"
+          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textHome').style.display='block'"
+          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textHome').style.display='none'"
         >
+          <img src="./..\assets\icones\home.png" />
+          <p
+            id="textHome"
+            style="display: none; position: absolute; left: 95px;"
+          >
+            Home
+          </p>
+        </div>
+        <div
+          class="roundCamera"
+          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textCamera').style.display='block'"
+          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textCamera').style.display='none'"
+        >
+          <img src="./..\assets\icones\camera.png" />
+          <p
+            id="textCamera"
+            style="display: none; position: absolute; left: 95px;"
+          >
+            Câmera
+          </p>
+        </div>
+        <div
+          class="roundTelefone"
+          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textTelefone').style.display='block'"
+          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textTelefone').style.display='none'"
+        >
+          <img src="./..\assets\icones\telefone.png" />
+          <p
+            id="textTelefone"
+            style="display: none; position: absolute; left: 95px;"
+          >
+            Telefone
+          </p>
+        </div>
+        <div
+          class="roundPlay"
+          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textVideo').style.display='block'"
+          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textVideo').style.display='none'"
+        >
+          <img src="./..\assets\icones\play.png" />
+          <p
+            id="textVideo"
+            style="display: none; position: absolute; left: 95px;"
+          >
+            Vídeos
+          </p>
+        </div>
+        <div
+          class="roundConfig"
+          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textConfig').style.display='block'"
+          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textConfig').style.display='none'"
+        >
+          <img
+            src="./..\assets\icones\config.png"
+          />
+          <p
+            id="textConfig"
+            style="display: none; position: absolute; left: 95px;"
+          >
+            Configurações
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <select class="selectDevice">
           <option
             v-for="option in devices"
             :key="option.value"
@@ -104,9 +170,36 @@
               v-model="novoDevice"
               placeholder="Novo dispositivo"
             />
-            <button @click="addToListDevices">Salvar</button>
-            <button @click="showModal = false">Fechar</button>
+            <div
+              style="display: flex; justify-content: space-around; margin: 15px; 0 15px 0"
+            >
+              <button @click="addToListDevices">Salvar</button>
+              <button @click="showModal = false">Fechar</button>
+            </div>
+            <span style="color: red;" v-if="errorMessage">
+              Nome do dispositivo não pode ser em branco.
+            </span>
           </div>
+        </div>
+        <div class="blockEmergencia">
+          <div class="emergenciaSquare">
+            <img src="./..\assets\icones\emergencia.png" />
+            <div class="centered">!</div>
+          </div>
+          <div>
+            <h4 style="position: absolute; top: 4px; left: 90px;">
+              Emergência
+            </h4>
+            <h6
+              style="position: absolute; top: 22px; left: 90px; color: #87888c;"
+            >
+              Ligar apenas em caso de emergência
+            </h6>
+          </div>
+          <label class="switch">
+            <input type="checkbox" v-model="toggle" @click="changeToggle" />
+            <span class="slider round"></span>
+          </label>
         </div>
       </div>
       <div class="blocks">
@@ -218,6 +311,8 @@ export default {
       hourNow: '',
       deviceOptions: '',
       showModal: false,
+      toggle: false,
+      errorMessage: false,
       novoDevice: '',
       devices: [
         { id: 1, device: 'Frigobar' },
@@ -273,11 +368,19 @@ export default {
   },
   methods: {
     addToListDevices() {
-      this.devices.push({
-        id: this.devices.length + 1,
-        device: this.novoDevice,
-      })
-      this.novoDevice = ''
+      if (this.novoDevice.length > 0) {
+        this.devices.push({
+          id: this.devices.length + 1,
+          device: this.novoDevice,
+        })
+        this.novoDevice = ''
+        this.showModal = false
+      } else {
+        this.errorMessage = true
+      }
+    },
+    changeToggle() {
+      this.toggle = !this.toggle
     },
   },
 }
@@ -437,5 +540,149 @@ input::-webkit-input-placeholder {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 1rem;
+}
+.blockEmergencia {
+  position: absolute;
+  width: 490px;
+  height: 79px;
+  left: 878px;
+  top: 149px;
+  display: flex;
+  padding-right: 15px;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  background: #1e1e1e;
+  border-radius: 12px;
+}
+.emergenciaSquare {
+  position: absolute;
+  width: 53px;
+  height: 47px;
+  left: 23px;
+  top: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b2a2a;
+  border-radius: 4px;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.roundHome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 240px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundCamera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 335px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundTelefone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 430px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundPlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 525px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundConfig {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 620px;
+  border-radius: 50%;
+  background: #505050;
 }
 </style>
