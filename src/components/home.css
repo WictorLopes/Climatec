@@ -1,6 +1,10 @@
 li {
   list-style-type: none;
 }
+.logoNome {
+  display: flex;
+  align-items: center;
+}
 .header {
   display: flex;
   margin: 0px 80px 0px 80px;
@@ -179,7 +183,7 @@ input::-webkit-input-placeholder {
   background: #2b2a2a;
   border-radius: 4px;
 }
-.fotoPerfil{
+.fotoPerfil {
   margin-left: 80px;
 }
 .centered {
@@ -420,10 +424,17 @@ input:checked + .slider:before {
     background: #1e1e1e;
     border-radius: 12px;
   }
-  
 }
 @media only screen and (max-width: 910px) {
-  .fotoPerfil{
+  .fotoPerfil {
     margin-left: 15px;
+  }
+  .logoNome {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: -8px;
+    display: flex;
+    align-items: center;
   }
 }

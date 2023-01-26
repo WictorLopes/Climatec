@@ -5,7 +5,7 @@
       href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
     />
     <header class="header">
-      <div style="display: flex; align-items: center;">
+      <div class="logoNome">
         <img src="./../assets/logo.png" style="margin-right: 30px;" />
         <h1>Climatec</h1>
       </div>
