@@ -382,7 +382,7 @@ input:checked + .slider:before {
     align-items: stretch;
   }
   .blocks {
-    margin-top: 209px;
+    margin-top: 225px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -415,7 +415,7 @@ input:checked + .slider:before {
     width: 490px;
     height: 79px;
     left: 209px;
-    top: 261px;
+    top: 240px;
     display: flex;
     padding-right: 15px;
     flex-direction: row;
@@ -424,11 +424,6 @@ input:checked + .slider:before {
     background: #1e1e1e;
     border-radius: 12px;
   }
-}
-@media only screen and (max-width: 910px) {
-  .fotoPerfil {
-    margin-left: 15px;
-  }
   .logoNome {
     display: flex;
     align-items: center;
@@ -436,5 +431,10 @@ input:checked + .slider:before {
     top: -8px;
     display: flex;
     align-items: center;
+  }
+}
+@media only screen and (max-width: 910px) {
+  .fotoPerfil {
+    margin-left: 15px;
   }
 }
