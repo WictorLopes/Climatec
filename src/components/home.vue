@@ -61,7 +61,32 @@
           <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
         </div>
         <div class="fotoPerfil">
-          <img src="./..\assets\icones\perfil.png" />
+          <img
+            v-on:click="showMenu = !showMenu"
+            src="./..\assets\icones\perfil.png"
+          />
+          <div class="showMenu" v-if="showMenu">
+            <li>
+              <ul>
+                <a style="color: white;" href="#">Home</a>
+              </ul>
+              <ul>
+                <a style="color: white;" href="#" >Câmera</a>
+              </ul>
+              <ul>
+                <a style="color: white;" href="#" >Telefone</a>
+              </ul>
+              <ul>
+                <a style="color: white;" href="#" >Vídeos</a>
+              </ul>
+              <ul>
+                <a style="color: white;" href="#" >Configuração</a>
+              </ul>
+              <ul>
+                <a style="color: white;" href="#" >Sair</a>
+              </ul>
+            </li>
+          </div>
         </div>
       </div>
     </header>

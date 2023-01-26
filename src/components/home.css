@@ -186,6 +186,17 @@ input::-webkit-input-placeholder {
 .fotoPerfil {
   margin-left: 80px;
 }
+.showMenu {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 32px;
+  width: 175px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: #2e3a59;
+}
 .centered {
   position: absolute;
   top: 50%;
@@ -461,4 +472,3 @@ input:checked + .slider:before {
     margin-left: 0px;
   }
 }
-
