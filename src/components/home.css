@@ -12,7 +12,7 @@ li {
   height: 33px;
   background: #1e1e1e;
   border-radius: 40px;
-  background-image: url('../assets/lupa.png');
+  background-image: url("../assets/lupa.png");
   background-repeat: no-repeat;
   background-position: left 2px center;
   background-size: 25px;
@@ -179,6 +179,9 @@ input::-webkit-input-placeholder {
   background: #2b2a2a;
   border-radius: 4px;
 }
+.fotoPerfil{
+  margin-left: 80px;
+}
 .centered {
   position: absolute;
   top: 50%;
@@ -208,7 +211,7 @@ input::-webkit-input-placeholder {
 
 .slider:before {
   position: absolute;
-  content: '';
+  content: "";
   height: 26px;
   width: 26px;
   left: 4px;
@@ -295,4 +298,132 @@ input:checked + .slider:before {
   top: 620px;
   border-radius: 50%;
   background: #505050;
+}
+.menu {
+  display: none;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 175px;
+  height: 168px;
+  border-radius: 20px;
+  background-color: #2e3a59;
+}
+.addDeviceButton {
+  font-size: 37px;
+  position: absolute;
+  width: 64.2px;
+  height: 61.58px;
+  left: 639.8px;
+  top: 157.71px;
+
+  background: #1e1e1e;
+  border-radius: 10px;
+  color: #ffffff;
+  border: none;
+}
+@media only screen and (max-width: 1450px) {
+  .blockEmergencia {
+    position: absolute;
+    width: 490px;
+    height: 79px;
+    left: 618px;
+    top: 149px;
+    display: flex;
+    padding-right: 15px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    background: #1e1e1e;
+    border-radius: 12px;
+  }
+  .selectDevice {
+    color: #ffffff;
+    position: absolute;
+    width: 415.32px;
+    height: 61.58px;
+    left: 100px;
+    top: 157.71px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    border: none;
+  }
+  .addDeviceButton {
+    font-size: 37px;
+    position: absolute;
+    width: 64.2px;
+    height: 61.58px;
+    left: 530px;
+    top: 157.71px;
+
+    background: #1e1e1e;
+    border-radius: 10px;
+    color: #ffffff;
+    border: none;
+  }
+}
+@media only screen and (max-width: 1160px) {
+  .blockHistorico {
+    position: absolute;
+    top: 715px;
+    margin-left: 202px;
+    width: 374px;
+    height: 109px;
+    border-radius: 20px;
+    background-color: #2e3a59;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+  .blocks {
+    margin-top: 209px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+  .blockSaude {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 349px;
+    margin-left: 410px;
+    width: 175px;
+    height: 168px;
+    border-radius: 20px;
+    background-color: #2e3a59;
+  }
+  .blockUltimoRegistro {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 542px;
+    margin-left: 410px;
+    width: 175px;
+    height: 168px;
+    border-radius: 20px;
+    background-color: #2e3a59;
+  }
+  .blockEmergencia {
+    position: absolute;
+    width: 490px;
+    height: 79px;
+    left: 209px;
+    top: 261px;
+    display: flex;
+    padding-right: 15px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    background: #1e1e1e;
+    border-radius: 12px;
+  }
+  
+}
+@media only screen and (max-width: 910px) {
+  .fotoPerfil{
+    margin-left: 15px;
+  }
 }

@@ -55,10 +55,13 @@
         />
 
         <div style="display: flex; flex-direction: column;">
-          <span style="font-size: 30px;">
+          <span style="font-size: 30px; margin-right: 15px;">
             {{ Math.floor(this.tempLocal) }}°C
           </span>
           <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
+        </div>
+        <div class="fotoPerfil">
+          <img src="./..\assets\icones\perfil.png" />
         </div>
       </div>
     </header>
@@ -121,9 +124,7 @@
           onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textConfig').style.display='block'"
           onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textConfig').style.display='none'"
         >
-          <img
-            src="./..\assets\icones\config.png"
-          />
+          <img src="./..\assets\icones\config.png" />
           <p
             id="textConfig"
             style="display: none; position: absolute; left: 95px;"
@@ -146,19 +147,7 @@
         <button
           data-toggle="modal"
           data-target="#myModal"
-          style="
-            font-size: 37px;
-            position: absolute;
-            width: 64.2px;
-            height: 61.58px;
-            left: 639.8px;
-            top: 157.71px;
-
-            background: #1e1e1e;
-            border-radius: 10px;
-            color: #ffffff;
-            border: none;
-          "
+          class="addDeviceButton"
           @click="showModal = true"
         >
           +
@@ -311,6 +300,7 @@ export default {
       hourNow: '',
       deviceOptions: '',
       showModal: false,
+      showMenu: false,
       toggle: false,
       errorMessage: false,
       novoDevice: '',
@@ -368,6 +358,7 @@ export default {
   },
   methods: {
     addToListDevices() {
+      this.errorMessage = false
       if (this.novoDevice.length > 0) {
         this.devices.push({
           id: this.devices.length + 1,
