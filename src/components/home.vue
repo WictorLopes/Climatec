@@ -345,7 +345,7 @@ export default {
 
   mounted() {
     axios
-      .get('http://climatec.sp.skdrive.net/climatec/api/v1/sensor')
+      .get('https://climatec.sp.skdrive.net/climatec/api/v1/sensor')
       .then((res) => {
         console.log(res.data)
         this.status = res.data.statusSensor
