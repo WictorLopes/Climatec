@@ -71,19 +71,19 @@
                 <a style="color: white;" href="#">Home</a>
               </ul>
               <ul>
-                <a style="color: white;" href="#" >Câmera</a>
+                <a style="color: white;" href="#">Câmera</a>
               </ul>
               <ul>
-                <a style="color: white;" href="#" >Telefone</a>
+                <a style="color: white;" href="#">Telefone</a>
               </ul>
               <ul>
-                <a style="color: white;" href="#" >Vídeos</a>
+                <a style="color: white;" href="#">Vídeos</a>
               </ul>
               <ul>
-                <a style="color: white;" href="#" >Configuração</a>
+                <a style="color: white;" href="#">Configuração</a>
               </ul>
               <ul>
-                <a style="color: white;" href="#" >Sair</a>
+                <a style="color: white;" href="#">Sair</a>
               </ul>
             </li>
           </div>
@@ -250,7 +250,7 @@
             <span style="font-size: 10px;">Temperatura</span>
           </div>
         </div>
-        <div class="blockSaude" v-if="this.status_health === 'Ok'">
+        <div class="blockSaude" v-if="this.status_health === 'OK'">
           <img
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./..\assets\icones\saudeOK.png"
@@ -283,7 +283,7 @@
             <span style="font-size: 10px;">Último Registro</span>
           </div>
         </div>
-        <div class="blockHistorico">
+        <div class="blockHistorico" v-if="this.historico.length > 1">
           <span style="font-size: 18px;">Histórico de Temperaturas</span>
           <div style="display: flex;">
             <li
@@ -294,6 +294,12 @@
               {{ item.temp_degrees }}
               <img src="./..\assets\icones\historicoTemp.png" />
             </li>
+          </div>
+        </div>
+        <div class="blockHistorico" v-else>
+          <span style="font-size: 18px;">Histórico de Temperaturas</span>
+          <div style="display: flex; justify-content: center;">
+            <span>Sem histórico no momento</span>
           </div>
         </div>
       </div>
@@ -339,15 +345,16 @@ export default {
 
   mounted() {
     axios
-      .get('https://projetosdnode.000webhostapp.com/webapi/api/read.php')
+      .get('http://climatec.sp.skdrive.net/climatec/api/v1/sensor')
       .then((res) => {
-        this.status = res.data.status_sensor
-        this.tempAtual = res.data.data_log[0].temp_degrees
-        this.tempAnterior = res.data.data_log[1].temp_degrees
-        this.response = res.data.data_log[0].created_at
+        console.log(res.data)
+        this.status = res.data.statusSensor
+        this.tempAtual = res.data.data[0].tempDegrees
+        this.tempAnterior = res.data.data[1].tempDegrees
+        this.response = res.data.data[0].created_at
         this.ultimoRegistro = moment(this.response).format('DD/MM/YYYY')
-        this.historico = res.data.data_log.slice(1, 7)
-        this.status_health = res.data.status_health
+        this.historico = res.data.data.slice(1, 7)
+        this.status_health = res.data.statusHealth
       })
       .catch((error) => {
         console.log(error)
