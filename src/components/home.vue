@@ -12,9 +12,8 @@
       <div>
         <input
           class="searchbar"
-          type="text"
-          v-model="input"
           placeholder="Pesquisar"
+          style="padding-left: 35px; color: white;"
         />
       </div>
       <div style="display: flex; align-items: center;">
@@ -59,6 +58,7 @@
             {{ Math.floor(this.tempLocal) }}°C
           </span>
           <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
+          {{ this.city }}
         </div>
         <div class="fotoPerfil">
           <img
@@ -386,7 +386,10 @@ export default {
       toggle: false,
       selectedDevice: '',
       errorMessage: false,
+      latitude: '',
+      longitude: '',
       sensorData: null,
+      city: '',
       sensorFull: null,
       novoDevice: '',
       devices: [],
@@ -400,6 +403,14 @@ export default {
   },
 
   mounted() {
+    if (navigator.geolocation) {
+      this.local = navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords)
+        this.latitude = position.coords.latitude
+        this.longitude = position.coords.longitude
+        this.getCity()
+      })
+    }
     axios
       .get('https://climatec.sp.skdrive.net/climatec/api/v1/devices')
       .then((res) => {
@@ -410,7 +421,7 @@ export default {
       })
     axios
       .get(
-        'https://api.weatherbit.io/v2.0/current?city=recife&country=br&lang=pt&key=3bd70eb0e2024093af278062f08a5eca',
+        `https://api.weatherbit.io/v2.0/current?city=${this.city}&country=br&lang=pt&key=3bd70eb0e2024093af278062f08a5eca`,
       )
       .then((res) => {
         this.tempLocal = res.data.data[0].temp
@@ -423,7 +434,7 @@ export default {
         console.log(error)
         axios
           .get(
-            'https://api.openweathermap.org/data/2.5/weather?lat=-8.0403&lon=-34.5500&lang=pt&units=metric&appid=cc2847e85b696ef29e3580bf28aed600',
+            `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&lang=pt&units=metric&appid=cc2847e85b696ef29e3580bf28aed600`,
           )
           .then((res) => {
             this.tempLocal = res.data.main.temp
@@ -438,11 +449,24 @@ export default {
       })
   },
   methods: {
+    async getCity() {
+      const response = await axios.get(
+        'https://api.opencagedata.com/geocode/v1/json',
+        {
+          params: {
+            key: '962910487fa142e19394eb0facc173ba',
+            q: `${this.latitude}+${this.longitude}`,
+          },
+        },
+      )
+      this.city = response.data.results[0].components.city
+    },
+
     getDeviceDatas(newID) {
       axios
         .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
         .then((res) => {
-        console.log(res)
+          console.log(res)
           this.status = res.data.data.statusSensor
           this.status_health = res.data.data.statusHealth
         })
