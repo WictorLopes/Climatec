@@ -68,22 +68,19 @@
           <div class="showMenu" v-if="showMenu">
             <li>
               <ul>
-                <a style="color: white;" href="#">Home</a>
+                <a style="color: white; text-decoration: none;" href="#">
+                  Home
+                </a>
               </ul>
               <ul>
-                <a style="color: white;" href="#">Câmera</a>
+                <a style="color: white; text-decoration: none;" href="#">
+                  Configuração
+                </a>
               </ul>
               <ul>
-                <a style="color: white;" href="#">Telefone</a>
-              </ul>
-              <ul>
-                <a style="color: white;" href="#">Vídeos</a>
-              </ul>
-              <ul>
-                <a style="color: white;" href="#">Configuração</a>
-              </ul>
-              <ul>
-                <a style="color: white;" href="#">Sair</a>
+                <a style="color: white; text-decoration: none;" href="#">
+                  Sair
+                </a>
               </ul>
             </li>
           </div>
@@ -160,13 +157,10 @@
       </div>
 
       <div>
-        <select class="selectDevice">
-          <option
-            v-for="option in devices"
-            :key="option.value"
-            :value="option.value"
-          >
-            {{ option.device }}
+        <select class="selectDevice" v-model="selectedDevice">
+          <option value="" disabled>Selecione o dispositivo</option>
+          <option v-for="device in devices" :key="device.id" :value="device.id">
+            {{ device.deviceName }}
           </option>
         </select>
         <button
@@ -187,8 +181,30 @@
             <div
               style="display: flex; justify-content: space-around; margin: 15px; 0 15px 0"
             >
-              <button @click="addToListDevices">Salvar</button>
-              <button @click="showModal = false">Fechar</button>
+              <button
+                style="
+                  background: #d9d9d9;
+                  border-radius: 10px;
+                  border: none;
+                  width: 92px;
+                  height: 30px;
+                "
+                @click="addToListDevices"
+              >
+                Salvar
+              </button>
+              <button
+                style="
+                  background: #d9d9d9;
+                  border-radius: 10px;
+                  border: none;
+                  width: 92px;
+                  height: 30px;
+                "
+                @click="showModal = false"
+              >
+                Fechar
+              </button>
             </div>
             <span style="color: red;" v-if="errorMessage">
               Nome do dispositivo não pode ser em branco.
@@ -239,7 +255,17 @@
             <span style="font-size: 10px;">Status do sensor</span>
           </div>
         </div>
-        <div class="blockTemp">
+        <div class="blockTemp" v-if="this.response == 0">
+          <img
+            style="margin-bottom: 110px; margin-left: 10px;"
+            src="./..\assets\icones\temp.png"
+          />
+
+          <div class="textTemp">
+            <span style="font-size: 10px;">Sem dados</span>
+          </div>
+        </div>
+        <div class="blockTemp" v-else>
           <img
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./..\assets\icones\temp.png"
@@ -272,7 +298,17 @@
             <span style="font-size: 10px;">Saúde do sensor</span>
           </div>
         </div>
-        <div class="blockUltimoRegistro">
+        <div class="blockUltimoRegistro" v-if="this.response == 0">
+          <img
+            style="margin-bottom: 110px; margin-left: 10px;"
+            src="./..\assets\icones\historico.png"
+          />
+
+          <div class="textTemp">
+            <span style="font-size: 10px;">Sem dados</span>
+          </div>
+        </div>
+        <div class="blockUltimoRegistro" v-else>
           <img
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./..\assets\icones\historico.png"
@@ -285,18 +321,29 @@
         </div>
         <div class="blockHistorico" v-if="this.historico.length > 1">
           <span style="font-size: 18px;">Histórico de Temperaturas</span>
-          <div style="display: flex;">
+          <div style="display: flex; justify-content: space-evenly;">
             <li
-              style="font-size: 12px;"
+              style="
+                font-size: 12px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              "
               v-for="item in this.historico"
               :key="item.id"
             >
-              {{ item.temp_degrees }}
+              {{ item.tempDegrees }}
               <img src="./..\assets\icones\historicoTemp.png" />
             </li>
           </div>
         </div>
         <div class="blockHistorico" v-else>
+          <span style="font-size: 18px;">Histórico de Temperaturas</span>
+          <div style="display: flex; justify-content: center;">
+            <span>Sem histórico no momento</span>
+          </div>
+        </div>
+        <div class="blockHistorico" v-if="this.response == 0">
           <span style="font-size: 18px;">Histórico de Temperaturas</span>
           <div style="display: flex; justify-content: center;">
             <span>Sem histórico no momento</span>
@@ -328,33 +375,35 @@ export default {
       tempLocal: '',
       tempLocalDescription: '',
       tempLocalCode: '',
+      nameDevice: '',
       hourNow: '',
+      idDevice: '',
+      idSensor: '',
       deviceOptions: '',
       showModal: false,
       showMenu: false,
+      response: '',
       toggle: false,
+      selectedDevice: '',
       errorMessage: false,
+      sensorData: null,
+      sensorFull: null,
       novoDevice: '',
-      devices: [
-        { id: 1, device: 'Frigobar' },
-        { id: 2, device: 'Freezer' },
-        { id: 3, device: 'Congelador' },
-      ],
+      devices: [],
     }
+  },
+
+  watch: {
+    selectedDevice: function (newId) {
+      this.getDeviceDatas(newId)
+    },
   },
 
   mounted() {
     axios
-      .get('https://climatec.sp.skdrive.net/climatec/api/v1/sensor')
+      .get('https://climatec.sp.skdrive.net/climatec/api/v1/devices')
       .then((res) => {
-        console.log(res.data)
-        this.status = res.data.statusSensor
-        this.tempAtual = res.data.data[0].tempDegrees
-        this.tempAnterior = res.data.data[1].tempDegrees
-        this.response = res.data.data[0].created_at
-        this.ultimoRegistro = moment(this.response).format('DD/MM/YYYY')
-        this.historico = res.data.data.slice(1, 7)
-        this.status_health = res.data.statusHealth
+        this.devices = res.data
       })
       .catch((error) => {
         console.log(error)
@@ -389,18 +438,44 @@ export default {
       })
   },
   methods: {
+    getDeviceDatas(newID) {
+      axios
+        .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
+        .then((res) => {
+        console.log(res)
+          this.status = res.data.data.statusSensor
+          this.status_health = res.data.data.statusHealth
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      axios
+        .get(`https://climatec.sp.skdrive.net/climatec/api/v1/sensor/${newID}`)
+        .then((res) => {
+          this.response = res.data.data
+          this.tempAtual = res.data.data[0].tempDegrees
+          this.tempAnterior = res.data.data[1].tempDegrees
+          this.response = res.data.data[0].created_at
+          this.ultimoRegistro = moment(this.response).format('DD/MM/YYYY')
+          this.historico = res.data.data.slice(1, 7)
+          this.idSensor = res.data.idDevice
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     addToListDevices() {
       this.errorMessage = false
       if (this.novoDevice.length > 0) {
-        this.devices.push({
-          id: this.devices.length + 1,
-          device: this.novoDevice,
+        axios.post('https://climatec.sp.skdrive.net/climatec/api/v1/device', {
+          deviceName: this.novoDevice,
         })
         this.novoDevice = ''
         this.showModal = false
       } else {
         this.errorMessage = true
       }
+      location.reload()
     },
     changeToggle() {
       this.toggle = !this.toggle
