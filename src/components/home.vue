@@ -384,6 +384,7 @@ export default {
       showMenu: false,
       response: '',
       toggle: false,
+      country_code: '',
       selectedDevice: '',
       errorMessage: false,
       latitude: '',
@@ -436,12 +437,15 @@ export default {
         },
       )
       this.city = response.data.results[0].components.city
+      console.log(response)
       this.getTemp()
     },
     getTemp() {
       axios
         .get(
-          `https://api.weatherbit.io/v2.0/current?city=${this.city.toLowerCase()}&country=br&lang=pt&key=3bd70eb0e2024093af278062f08a5eca`,
+          `https://api.weatherbit.io/v2.0/current?city=${this.city.toLowerCase()}&country=${
+            this.country_code
+          }&lang=pt&key=3bd70eb0e2024093af278062f08a5eca`,
         )
         .then((res) => {
           this.tempLocal = res.data.data[0].temp
