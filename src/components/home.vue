@@ -443,7 +443,7 @@ export default {
     getTemp() {
       axios
         .get(
-          `https://api.weatherbit.io/v2.0/current?city=${this.city.toLowerCase()}&country=${
+          `https://api.weatherbit.io/v2.0/current?city=${this.city}&country=${
             this.country_code
           }&lang=pt&key=3bd70eb0e2024093af278062f08a5eca`,
         )
