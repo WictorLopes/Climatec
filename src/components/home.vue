@@ -403,12 +403,15 @@ export default {
   },
 
   mounted() {
+    setTimeout(() => {
+      this.getCity()
+    }, 2000)
+
     if (navigator.geolocation) {
       this.local = navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords)
         this.latitude = position.coords.latitude
         this.longitude = position.coords.longitude
-        this.getCity()
       })
     }
     axios
@@ -419,35 +422,8 @@ export default {
       .catch((error) => {
         console.log(error)
       })
-    axios
-      .get(
-        `https://api.weatherbit.io/v2.0/current?city=${this.city}&country=br&lang=pt&key=3bd70eb0e2024093af278062f08a5eca`,
-      )
-      .then((res) => {
-        this.tempLocal = res.data.data[0].temp
-        this.tempLocalDescription = res.data.data[0].weather.description
-        this.tempLocalCode = res.data.data[0].weather.code
-        this.dateNow = new Date()
-        this.hourNow = this.dateNow.getHours()
-      })
-      .catch((error) => {
-        console.log(error)
-        axios
-          .get(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&lang=pt&units=metric&appid=cc2847e85b696ef29e3580bf28aed600`,
-          )
-          .then((res) => {
-            this.tempLocal = res.data.main.temp
-            this.tempLocalDescription = res.data.weather[0].description
-            this.tempLocalCode = res.data.weather[0].id
-            this.dateNow = new Date()
-            this.hourNow = this.dateNow.getHours()
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      })
   },
+
   methods: {
     async getCity() {
       const response = await axios.get(
@@ -460,6 +436,37 @@ export default {
         },
       )
       this.city = response.data.results[0].components.city
+      this.getTemp()
+    },
+    getTemp() {
+      axios
+        .get(
+          `https://api.weatherbit.io/v2.0/current?city=${this.city.toLowerCase()}&country=br&lang=pt&key=3bd70eb0e2024093af278062f08a5eca`,
+        )
+        .then((res) => {
+          this.tempLocal = res.data.data[0].temp
+          this.tempLocalDescription = res.data.data[0].weather.description
+          this.tempLocalCode = res.data.data[0].weather.code
+          this.dateNow = new Date()
+          this.hourNow = this.dateNow.getHours()
+        })
+        .catch((error) => {
+          console.log(error)
+          axios
+            .get(
+              `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&lang=pt&units=metric&appid=cc2847e85b696ef29e3580bf28aed600`,
+            )
+            .then((res) => {
+              this.tempLocal = res.data.main.temp
+              this.tempLocalDescription = res.data.weather[0].description
+              this.tempLocalCode = res.data.weather[0].id
+              this.dateNow = new Date()
+              this.hourNow = this.dateNow.getHours()
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        })
     },
 
     getDeviceDatas(newID) {
