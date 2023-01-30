@@ -436,8 +436,10 @@ export default {
           },
         },
       )
-      this.city = response.data.results[0].components.city
+      this.city = response.data.results[0].components.city.toLowerCase()
+      this.country_code =  response.data.results[0].components.country_code
       console.log(response)
+      console.log('this.city', this.city)
       this.getTemp()
     },
     getTemp() {
