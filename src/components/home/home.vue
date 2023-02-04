@@ -241,7 +241,11 @@
             </h6>
           </div>
           <label class="switch">
-            <input type="checkbox" v-model="toggle" @click="changeToggle" />
+            <input
+              type="checkbox"
+              v-model="toggle"
+              @click="sendEmergencyEmail()"
+            />
             <span class="slider round"></span>
           </label>
         </div>
@@ -287,8 +291,8 @@
           <div class="textTemp">
             <img
               v-if="
-                this.alertaMax > this.tempAtualNumero ||
-                this.alertaMin < this.tempAtualNumero
+                this.tempAtualNumero > this.alertaMax ||
+                this.tempAtualNumero < this.alertaMin
               "
               @mouseenter="showModalAlertTemp = true"
               @mouseleave="showModalAlertTemp = false"
@@ -435,6 +439,7 @@ export default {
       errorMessage: false,
       latitude: '',
       longitude: '',
+      nomeDevice: '',
       sensorData: null,
       city: '',
       sensorFull: null,
@@ -471,6 +476,14 @@ export default {
   },
 
   methods: {
+    sendEmergencyEmail() {
+      this.toggle = !this.toggle
+      if (this.toggle) {
+        axios.post(
+          `https://climatec.sp.skdrive.net/climatec/api/v1/sendEmail/${this.nomeDevice}`,
+        )
+      }
+    },
     redirectToAboutPage() {
       this.$router.go('/config')
     },
@@ -528,8 +541,7 @@ export default {
           this.status_health = res.data.data.statusHealth
           this.alertaMin = res.data.data.alertMin
           this.alertaMax = res.data.data.alertMax
-          console.log(this.alertaMin)
-          console.log(this.alertaMax)
+          this.nomeDevice = res.data.data.deviceName
         })
         .catch((error) => {
           console.log(error)
@@ -537,7 +549,6 @@ export default {
       axios
         .get(`https://climatec.sp.skdrive.net/climatec/api/v1/sensor/${newID}`)
         .then((res) => {
-          console.log(res.data.data[0])
           this.response = res.data.data
           this.tempAtual = res.data.data[0].tempDegrees
           this.tempAtualNumero = res.data.data[0].temperature
@@ -546,8 +557,6 @@ export default {
           this.ultimoRegistro = moment(this.response).format('DD/MM/YYYY')
           this.historico = res.data.data.slice(1, 7)
           this.idSensor = res.data.idDevice
-          console.log(this.tempAtual)
-          console.log(this.alertaMax > this.tempAtual)
         })
         .catch((error) => {
           console.log(error)
@@ -565,9 +574,6 @@ export default {
       } else {
         this.errorMessage = true
       }
-    },
-    changeToggle() {
-      this.toggle = !this.toggle
     },
   },
 }
