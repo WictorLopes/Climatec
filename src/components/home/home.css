@@ -16,7 +16,7 @@ li {
   height: 33px;
   background: #1e1e1e;
   border-radius: 40px;
-  background-image: url("../assets/lupa.png");
+  background-image: url("../../assets/lupa.png");
   background-repeat: no-repeat;
   background-position: left 2px center;
   background-size: 25px;
@@ -125,18 +125,6 @@ input::-webkit-input-placeholder {
   flex-direction: column;
   justify-content: space-around;
   align-items: stretch;
-}
-.blockAlertaTemp {
-  position: absolute;
-  width: 251px;
-  height: 72px;
-  left: 338px;
-  background: #1e1e1e;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
 }
 .selectDevice {
   color: #ffffff;
@@ -249,7 +237,7 @@ input::-webkit-input-placeholder {
 }
 
 input:checked + .slider {
-  background-color: #cff80b;
+  background-color: #CFF80B;
 }
 
 input:checked + .slider:before {
@@ -336,7 +324,6 @@ input:checked + .slider:before {
   border-radius: 20px;
   background-color: #2e3a59;
 }
-
 .addDeviceButton {
   font-size: 37px;
   position: absolute;
@@ -350,31 +337,7 @@ input:checked + .slider:before {
   color: #ffffff;
   border: none;
 }
-.blockAlertaTemp {
-  position: absolute;
-  width: 251px;
-  height: 72px;
-  left: 338px;
-  background: #1e1e1e;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-}
 @media only screen and (max-width: 1450px) {
-  .blockAlertaTemp {
-    position: absolute;
-    width: 251px;
-    height: 72px;
-    left: 338px;
-    background: #1e1e1e;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
   .blockEmergencia {
     position: absolute;
     width: 490px;
@@ -416,18 +379,6 @@ input:checked + .slider:before {
   }
 }
 @media only screen and (max-width: 1160px) {
-  .blockAlertaTemp {
-    position: absolute;
-    width: 251px;
-    height: 72px;
-    left: 338px;
-    background: #1e1e1e;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
   .blockHistorico {
     position: absolute;
     top: 715px;

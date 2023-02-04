@@ -1,16 +1,16 @@
 <template>
-  <HomePage />
+  <!-- <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/config">config</router-link>
+  </nav> -->
+  <router-view/>
 </template>
 
 <script>
-import HomePage from "./components/home.vue";
 
 export default {
-  name: "App",
-  components: {
-    HomePage,
-  },
-};
+  name: 'App'
+}
 </script>
 
 <style>
@@ -19,7 +19,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-top: 60px;
 }
 .bg-custom {
