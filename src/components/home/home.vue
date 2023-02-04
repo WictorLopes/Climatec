@@ -289,15 +289,17 @@
             src="./../..\assets\icones\temp.png"
           />
           <div class="textTemp">
-            <img
-              v-if="
-                this.tempAtualNumero > this.alertaMax ||
-                this.tempAtualNumero < this.alertaMin
-              "
-              @mouseenter="showModalAlertTemp = true"
-              @mouseleave="showModalAlertTemp = false"
-              src="./../..\assets\icones\alertaTemp.png"
-            />
+            <div v-if="this.alertaMax || this.alertaMin">
+              <img
+                v-if="
+                  this.tempAtualNumero > this.alertaMax ||
+                  this.tempAtualNumero < this.alertaMin
+                "
+                @mouseenter="showModalAlertTemp = true"
+                @mouseleave="showModalAlertTemp = false"
+                src="./../..\assets\icones\alertaTemp.png"
+              />
+            </div>
             <span style="font-size: 18px;">{{ this.tempAtual }}</span>
             <span style="font-size: 10px;">Temperatura</span>
           </div>
@@ -318,7 +320,17 @@
             @close="showModalAlertTemp = false"
           >
             <img src="./../..\assets\icones\alertaTempGrande.png" />
-            <span style="margin-left: 8px;">Alerta de temperatura</span>
+            <span
+              v-if="this.tempAtualNumero > this.alertaMax"
+              style="margin-left: 8px; font-size: 10px;"
+            >
+              Alerta de temperatura. O dispositivo está acima da temperatura
+              máxima que é de {{ this.alertaMax }}ºC.
+            </span>
+            <span v-else style="margin-left: 8px; font-size: 10px;">
+              Alerta de temperatura. O dispositivo está abaixo da temperatura
+              mínima que é de {{ this.alertaMin }}ºC.
+            </span>
           </div>
         </div>
         <div class="blockSaude" v-if="this.status_health === 'OK'">
