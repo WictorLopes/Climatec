@@ -34,7 +34,7 @@
             this.hourNow >= 0 &&
             this.hourNow <= 23
           "
-          style="margin-right: 25px; width: 25%;"
+          style="margin-right: 25px; width: 17%;"
           src="./../..\assets\icones\chuva.png"
         />
         <img
