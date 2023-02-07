@@ -336,11 +336,26 @@
         <div v-if="showModalAlerta" class="modal">
           <div class="modal-content" style="height: 92px;">
             <input
+              v-if="alertaMin"
+              class="AddAlerta"
+              type="text"
+              v-model="alertaMinimo"
+              :placeholder="alertaMin + 'ºC'"
+            />
+            <input
+              v-else
               class="AddAlerta"
               v-model="alertaMinimo"
               placeholder="Temp Min"
             />
             <input
+              v-if="alertaMax"
+              class="AddAlerta"
+              v-model="alertaMaximo"
+              :placeholder="alertaMax + 'ºC'"
+            />
+            <input
+              v-else
               class="AddAlerta"
               v-model="alertaMaximo"
               placeholder="Temp Máx"
@@ -436,6 +451,8 @@ export default {
       sensorFull: null,
       alertaMinimo: '',
       alertaMaximo: '',
+      alertaMin: '',
+      alertaMax: '',
       novoDevice: '',
       newNameDevice: '',
       ultimoDevice: '',
@@ -443,11 +460,11 @@ export default {
     }
   },
 
-  // watch: {
-  //   selectedDevice: function (newId) {
-  //     this.getDeviceDatas(newId)
-  //   },
-  // },
+  watch: {
+    selectedDevice: function (newId) {
+      this.getDeviceDatas(newId)
+    },
+  },
 
   mounted() {
     setTimeout(() => {
@@ -515,6 +532,18 @@ export default {
             })
         })
     },
+    getDeviceDatas(newID) {
+      axios
+        .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
+        .then((res) => {
+          console.log(res.data.data)
+          this.alertaMin = res.data.data.alertMin
+          this.alertaMax = res.data.data.alertMax
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     editDevices() {
       this.errorMessage = false
       if (this.newNameDevice.length > 0) {
@@ -563,14 +592,18 @@ export default {
     changeToggle() {
       this.toggle = !this.toggle
     },
-    minMaxAlert(){
-      axios.post('https://climatec.sp.skdrive.net/climatec/api/v1/device/newAlert', {
+    minMaxAlert() {
+      axios.post(
+        'https://climatec.sp.skdrive.net/climatec/api/v1/device/newAlert',
+        {
           id: this.selectedDevice,
           alertMin: this.alertaMinimo,
           alertMax: this.alertaMaximo,
-        })
-        this.attpage()
+        },
+      )
+      this.attpage()
     },
+
     attpage() {
       setTimeout(() => {
         location.reload()
