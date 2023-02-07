@@ -546,6 +546,9 @@ export default {
     },
 
     getDeviceDatas(newID) {
+      if (this.toggle) {
+        this.toggle = !this.toggle
+      }
       axios
         .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
         .then((res) => {
