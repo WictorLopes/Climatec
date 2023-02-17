@@ -4,178 +4,9 @@
       rel="stylesheet"
       href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
     />
-    <header class="header">
-      <div class="logoNome">
-        <img src="../../assets/logo.png" style="margin-right: 30px;" />
-        <h1>Climatec</h1>
-      </div>
-      <div>
-        <input
-          class="searchbar"
-          placeholder="Pesquisar"
-          style="padding-left: 35px; color: white;"
-        />
-      </div>
-      <div style="display: flex; align-items: center;">
-        <img
-          v-if="
-            this.tempLocalCode >= 800 &&
-            this.tempLocalCode <= 803 &&
-            this.hourNow >= 6 &&
-            this.hourNow <= 17
-          "
-          style="margin-right: 25px;"
-          src="./../..\assets\icones\sol.png"
-        />
-        <img
-          v-else-if="
-            this.tempLocalCode >= 200 &&
-            this.tempLocalCode <= 751 &&
-            this.hourNow >= 0 &&
-            this.hourNow <= 23
-          "
-          style="margin-right: 25px; width: 17%;"
-          src="./../..\assets\icones\chuva.png"
-        />
-        <img
-          v-else-if="
-            this.tempLocalCode >= 800 ||
-            (this.tempLocalCode <= 803 &&
-              this.hourNow >= 18 &&
-              this.hourNow <= 5)
-          "
-          style="margin-right: 25px;"
-          src="./../..\assets\icones\noite.png"
-        />
-        <img
-          v-else
-          style="margin-right: 25px; width: 25%;"
-          src="./../..\assets\icones\nublado.png"
-        />
-
-        <div style="display: flex; flex-direction: column;">
-          <span style="font-size: 30px; margin-right: 15px;">
-            {{ Math.floor(this.tempLocal) }}°C
-          </span>
-          <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
-          {{ this.city }}
-        </div>
-        <div class="fotoPerfil">
-          <img
-            v-on:click="showMenu = !showMenu"
-            src="./../..\assets\icones\perfil.png"
-          />
-          <div class="showMenu" v-if="showMenu">
-            <li>
-              <ul>
-                <a style="color: white; text-decoration: none;" href="/">
-                  Home
-                </a>
-              </ul>
-              <ul>
-                <a style="color: white; text-decoration: none;" href="/config">
-                  Configuração
-                </a>
-              </ul>
-              <ul>
-                <a style="color: white; text-decoration: none;" href="#">
-                  Sair
-                </a>
-              </ul>
-            </li>
-          </div>
-        </div>
-      </div>
-    </header>
+    <HeaderPage />
     <body>
-      <div class="leftMenu">
-        <div
-          class="roundHome"
-          style="background: #1e1e1e;"
-          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textHome').style.display='block'"
-          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textHome').style.display='none'"
-        >
-          <a href="/">
-            <img
-              src="./../..\assets\icones\home.png"
-              style="filter: brightness(0.7);"
-            />
-          </a>
-          <p
-            id="textHome"
-            style="display: none; position: absolute; left: 95px;"
-          >
-            Home
-          </p>
-        </div>
-        <div
-          class="roundCamera"
-          style="background: #1e1e1e;"
-          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textCamera').style.display='block'"
-          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textCamera').style.display='none'"
-        >
-          <a href="#">
-            <img src="./../..\assets\icones\camera.png" />
-          </a>
-          <p
-            id="textCamera"
-            style="display: none; position: absolute; left: 95px;"
-          >
-            Câmera
-          </p>
-        </div>
-        <div
-          class="roundTelefone"
-          style="background: #1e1e1e;"
-          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textTelefone').style.display='block'"
-          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textTelefone').style.display='none'"
-        >
-          <a href="#">
-            <img src="./../..\assets\icones\telefone.png" />
-          </a>
-          <p
-            id="textTelefone"
-            style="display: none; position: absolute; left: 95px;"
-          >
-            Telefone
-          </p>
-        </div>
-        <div
-          class="roundPlay"
-          style="background: #1e1e1e;"
-          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textVideo').style.display='block'"
-          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textVideo').style.display='none'"
-        >
-          <a href="#">
-            <img src="./../..\assets\icones\play.png" />
-          </a>
-          <p
-            id="textVideo"
-            style="display: none; position: absolute; left: 95px;"
-          >
-            Vídeos
-          </p>
-        </div>
-        <div
-          class="roundConfig"
-          onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textConfig').style.display='block'"
-          onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textConfig').style.display='none'"
-        >
-          <a href="/config">
-            <img
-              src="./../..\assets\icones\config.png"
-              style="filter: brightness(10);"
-            />
-          </a>
-          <p
-            id="textConfig"
-            style="display: none; position: absolute; left: 95px;"
-          >
-            Configurações
-          </p>
-        </div>
-      </div>
-
+      <LeftMenu />
       <div>
         <select class="selectDevice" v-model="selectedDevice">
           <option value="" disabled>Selecione o dispositivo</option>
@@ -411,51 +242,36 @@
 
 <script>
 import axios from 'axios'
+import HeaderPage from '../header/header.vue'
+import LeftMenu from '../leftMenu/leftMenu.vue'
 
 export default {
   name: 'configPage',
+  components: {
+    HeaderPage,
+    LeftMenu,
+  },
   props: {
     msg: String,
   },
   data: function () {
     return {
-      status: '',
       input: '',
-      tempAtual: '',
-      tempAnterior: '',
-      ultimoRegistro: '',
-      historico: {},
-      status_health: '',
-      tempLocal: '',
-      tempLocalDescription: '',
-      tempLocalCode: '',
       nameDevice: '',
-      hourNow: '',
-      idDevice: '',
-      idSensor: '',
-      deviceOptions: '',
       showModal: false,
       showModalRemove: false,
       showModalEdit: false,
       showModalAlerta: false,
-      showMenu: false,
       response: '',
       toggle: false,
-      country_code: '',
       selectedDevice: '',
       errorMessage: false,
-      latitude: '',
-      longitude: '',
-      sensorData: null,
-      city: '',
-      sensorFull: null,
       alertaMinimo: '',
       alertaMaximo: '',
       alertaMin: '',
       alertaMax: '',
       novoDevice: '',
       newNameDevice: '',
-      ultimoDevice: '',
       devices: [],
     }
   },
@@ -465,18 +281,7 @@ export default {
       this.getDeviceDatas(newId)
     },
   },
-
   mounted() {
-    setTimeout(() => {
-      this.getCity()
-    }, 2000)
-
-    if (navigator.geolocation) {
-      this.local = navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude
-        this.longitude = position.coords.longitude
-      })
-    }
     axios
       .get('https://climatec.sp.skdrive.net/climatec/api/v1/devices')
       .then((res) => {
@@ -488,50 +293,6 @@ export default {
   },
 
   methods: {
-    async getCity() {
-      const response = await axios.get(
-        'https://api.opencagedata.com/geocode/v1/json',
-        {
-          params: {
-            key: '962910487fa142e19394eb0facc173ba',
-            q: `${this.latitude}+${this.longitude}`,
-          },
-        },
-      )
-      this.city = response.data.results[0].components.city.toLowerCase()
-      this.country_code = response.data.results[0].components.country_code
-      this.getTemp()
-    },
-    getTemp() {
-      axios
-        .get(
-          `https://api.weatherbit.io/v2.0/current?city=${this.city}&country=${this.country_code}&lang=pt&key=3bd70eb0e2024093af278062f08a5eca`,
-        )
-        .then((res) => {
-          this.tempLocal = res.data.data[0].temp
-          this.tempLocalDescription = res.data.data[0].weather.description
-          this.tempLocalCode = res.data.data[0].weather.code
-          this.dateNow = new Date()
-          this.hourNow = this.dateNow.getHours()
-        })
-        .catch((error) => {
-          console.log(error)
-          axios
-            .get(
-              `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude}&lon=${this.longitude}&lang=pt&units=metric&appid=cc2847e85b696ef29e3580bf28aed600`,
-            )
-            .then((res) => {
-              this.tempLocal = res.data.main.temp
-              this.tempLocalDescription = res.data.weather[0].description
-              this.tempLocalCode = res.data.weather[0].id
-              this.dateNow = new Date()
-              this.hourNow = this.dateNow.getHours()
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-        })
-    },
     getDeviceDatas(newID) {
       axios
         .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)

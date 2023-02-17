@@ -1,0 +1,60 @@
+.roundHome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 240px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundCamera {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 335px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundTelefone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 430px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundPlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 525px;
+  border-radius: 50%;
+  background: #505050;
+}
+.roundConfig {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  left: 56px;
+  top: 620px;
+  border-radius: 50%;
+  background: #505050;
+}
