@@ -358,10 +358,15 @@ export default {
         })
         this.novoDevice = ''
         this.showModal = false
-        location.reload()
       } else {
         this.errorMessage = true
       }
+      this.attpage()
+    },
+    attpage() {
+      setTimeout(() => {
+        location.reload()
+      }, 2000)
     },
   },
 }
