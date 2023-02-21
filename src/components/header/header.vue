@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="logoNome">
-      <img src="../../assets/logo.png" style="margin-right: 30px;" />
+      <img alt="" src="../../assets/logo.png" style="margin-right: 30px;" />
       <h1>Climatec</h1>
     </div>
     <div>
