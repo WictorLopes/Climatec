@@ -80,6 +80,7 @@
           </div>
           <label class="switch">
             <input
+              id="checkEmergency"
               type="checkbox"
               v-model="toggle"
               @click="sendEmergencyEmail()"
