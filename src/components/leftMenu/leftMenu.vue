@@ -10,6 +10,7 @@
     >
       <a href="/">
         <img
+          alt=""
           src="./../..\assets\icones\home.png"
           :style="{
             filter: $route.path == '/' ? 'brightness(10)' : 'brightness(0.7)',
@@ -27,7 +28,7 @@
       onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textCamera').style.display='none'"
     >
       <a href="#">
-        <img src="./../..\assets\icones\camera.png" />
+        <img alt="" src="./../..\assets\icones\camera.png" />
       </a>
       <p id="textCamera" style="display: none; position: absolute; left: 95px;">
         Câmera
@@ -40,7 +41,7 @@
       onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textTelefone').style.display='none'"
     >
       <a href="#">
-        <img src="./../..\assets\icones\telefone.png" />
+        <img alt="" src="./../..\assets\icones\telefone.png" />
       </a>
       <p
         id="textTelefone"
@@ -56,7 +57,7 @@
       onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textVideo').style.display='none'"
     >
       <a href="#">
-        <img src="./../..\assets\icones\play.png" />
+        <img alt="" src="./../..\assets\icones\play.png" />
       </a>
       <p id="textVideo" style="display: none; position: absolute; left: 95px;">
         Vídeos
@@ -72,6 +73,7 @@
     >
       <a href="/config">
         <img
+          alt=""
           src="./../..\assets\icones\config.png"
           :style="{
             filter:

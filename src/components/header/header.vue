@@ -19,6 +19,7 @@
           this.hourNow >= 6 &&
           this.hourNow <= 17
         "
+        alt=""
         style="margin-right: 25px;"
         src="../..\assets\icones\sol.png"
       />
@@ -29,6 +30,7 @@
           this.hourNow >= 0 &&
           this.hourNow <= 23
         "
+        alt=""
         style="margin-right: 25px; width: 17%;"
         src="../..\assets\icones\chuva.png"
       />
@@ -37,11 +39,13 @@
           this.tempLocalCode >= 800 ||
           (this.tempLocalCode <= 803 && this.hourNow >= 18 && this.hourNow <= 5)
         "
+        alt=""
         style="margin-right: 25px;"
         src="../..\assets\icones\noite.png"
       />
       <img
         v-else
+        alt=""
         style="margin-right: 25px; width: 25%;"
         src="../..\assets\icones\nublado.png"
       />
@@ -55,6 +59,7 @@
       </div>
       <div class="fotoPerfil">
         <img
+          alt=""
           v-on:click="showMenu = !showMenu"
           src="../..\assets\icones\perfil.png"
         />
@@ -96,7 +101,7 @@ export default {
       city: '',
     }
   },
-  
+
   mounted() {
     setTimeout(() => {
       this.getCity()
@@ -120,7 +125,10 @@ export default {
           },
         },
       )
-      this.city = response.data.results[0].components.city.toLowerCase()
+      console.log(response)
+      console.log(this.latitude)
+      console.log(this.longitude)
+      this.city = response.data.results[0].components.town.toLowerCase()
       this.country_code = response.data.results[0].components.country_code
       this.getTemp()
     },

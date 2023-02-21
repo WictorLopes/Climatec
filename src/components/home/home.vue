@@ -65,18 +65,18 @@
         </div>
         <div class="blockEmergencia">
           <div class="emergenciaSquare">
-            <img src="./../..\assets\icones\emergencia.png" />
+            <img alt="" src="./../..\assets\icones\emergencia.png" />
             <div class="centered">!</div>
           </div>
           <div>
             <h4 style="position: absolute; top: 4px; left: 90px;">
               Emergência
             </h4>
-            <h6
+            <h5
               style="position: absolute; top: 22px; left: 90px; color: #87888c;"
             >
               Ligar apenas em caso de emergência
-            </h6>
+            </h5>
           </div>
           <label class="switch">
             <input
@@ -91,6 +91,7 @@
       <div class="blocks">
         <div class="blockStatus" v-if="this.status === 'Ativo'">
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\ativo.png"
           />
@@ -102,6 +103,7 @@
         </div>
         <div class="blockStatus" v-else>
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\inativo.png"
           />
@@ -113,6 +115,7 @@
         </div>
         <div class="blockTemp" v-if="this.response == 0">
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\temp.png"
           />
@@ -123,6 +126,7 @@
         </div>
         <div class="blockTemp" v-else>
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\temp.png"
           />
@@ -135,6 +139,7 @@
                 "
                 @mouseenter="showModalAlertTemp = true"
                 @mouseleave="showModalAlertTemp = false"
+                alt=""
                 src="./../..\assets\icones\alertaTemp.png"
               />
             </div>
@@ -157,7 +162,7 @@
             v-if="showModalAlertTemp"
             @close="showModalAlertTemp = false"
           >
-            <img src="./../..\assets\icones\alertaTempGrande.png" />
+            <img alt="" src="./../..\assets\icones\alertaTempGrande.png" />
             <span
               v-if="this.tempAtualNumero > this.alertaMax"
               style="margin-left: 8px; font-size: 10px;"
@@ -173,6 +178,7 @@
         </div>
         <div class="blockSaude" v-if="this.status_health === 'OK'">
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\saudeOK.png"
           />
@@ -184,6 +190,7 @@
         </div>
         <div class="blockSaude" v-else>
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\inoperante.png"
           />
@@ -195,6 +202,7 @@
         </div>
         <div class="blockUltimoRegistro" v-if="this.response == 0">
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\historico.png"
           />
@@ -205,6 +213,7 @@
         </div>
         <div class="blockUltimoRegistro" v-else>
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\historico.png"
           />
@@ -228,7 +237,7 @@
               :key="item.id"
             >
               {{ item.tempDegrees }}
-              <img src="./..\../assets\icones\historicoTemp.png" />
+              <img alt="" src="./..\../assets\icones\historicoTemp.png" />
             </li>
           </div>
         </div>

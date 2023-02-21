@@ -146,6 +146,7 @@
         </div>
         <div class="blockRemover" @click="showModalRemove = true">
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\remover.png"
           />
@@ -156,6 +157,7 @@
         </div>
         <div class="blockEditar" @click="showModalEdit = true">
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\editar.png"
           />
@@ -227,6 +229,7 @@
         </div>
         <div class="blockAlerta" @click="showModalAlerta = true">
           <img
+            alt=""
             style="margin-bottom: 110px; margin-left: 10px;"
             src="./../..\assets\icones\alerta.png"
           />
