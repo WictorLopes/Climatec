@@ -1,24 +1,22 @@
-# projetosensor
+Climatec
+Climatec é um projeto que tem como objetivo monitorar a temperatura de diferentes dispositivos. Ele é construído usando o framework Vue e usa o Firebase como banco de dados em tempo real.
 
-## Project setup
-```
-npm install
-```
+Funcionalidades
+Adicionar dispositivos para monitoramento de temperatura.
+Visualizar as temperaturas dos dispositivos em tempo real.
+Receber notificações quando a temperatura atinge um limite definido.
+Tecnologias utilizadas
+Vue.js
+HTML
+CSS
+Javascript
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Instalação e Configuração
+Para executar o projeto, siga os seguintes passos:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Clone o repositório
+Na pasta raiz, execute o comando npm install para instalar as dependências
+Execute o comando npm run serve para iniciar o servidor de desenvolvimento
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Contribuindo
+Se você quiser contribuir com o projeto, sinta-se à vontade para enviar um pull request.

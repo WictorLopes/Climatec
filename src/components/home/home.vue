@@ -80,13 +80,24 @@
           </div>
           <label class="switch">
             <input
+              v-if="this.selectDevice"
               id="checkEmergency"
               type="checkbox"
               v-model="toggle"
               @click="sendEmergencyEmail()"
             />
+
             <span class="slider round"></span>
           </label>
+        </div>
+        <div v-if="showModalEmergency" class="modal">
+          <div class="modal-content">
+            <p>Um alerta foi enviado para o email registrado.</p>
+
+            <button @click="showModalEmergency = false">
+              Fechar
+            </button>
+          </div>
         </div>
       </div>
       <div class="blocks">
@@ -289,6 +300,8 @@ export default {
       idSensor: '',
       showModal: false,
       showModalAlertTemp: false,
+      showModalEmergency: false,
+      displayMessage: false,
       response: '',
       toggle: false,
       alertaMin: '',
@@ -325,6 +338,7 @@ export default {
         axios.post(
           `https://climatec.sp.skdrive.net/climatec/api/v1/sendEmail/${this.nomeDevice}`,
         )
+        this.showModalEmergency = true
       }
     },
 
