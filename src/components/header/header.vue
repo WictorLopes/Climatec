@@ -125,12 +125,10 @@ export default {
           },
         },
       )
-      console.log(response)
-      console.log(this.latitude)
-      console.log(this.longitude)
-      this.city = response.data.results[0].components.town.toLowerCase()
+      this.city = response.data.results[0].components.city
       this.country_code = response.data.results[0].components.country_code
       this.getTemp()
+      console.log(this.city)
     },
     getTemp() {
       axios
