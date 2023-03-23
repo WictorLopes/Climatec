@@ -300,7 +300,6 @@ export default {
       axios
         .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
         .then((res) => {
-          console.log(res.data.data)
           this.alertaMin = res.data.data.alertMin
           this.alertaMax = res.data.data.alertMax
         })
@@ -319,7 +318,7 @@ export default {
             },
           )
           .then((response) => {
-            console.log(response.data)
+            return response
           })
           .catch((error) => {
             console.log(error)
