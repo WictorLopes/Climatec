@@ -128,7 +128,6 @@ export default {
       this.city = response.data.results[0].components.city
       this.country_code = response.data.results[0].components.country_code
       this.getTemp()
-      console.log(this.city)
     },
     getTemp() {
       axios
