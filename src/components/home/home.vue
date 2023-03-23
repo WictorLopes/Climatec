@@ -80,7 +80,7 @@
           </div>
           <label class="switch">
             <input
-              v-if="this.selectDevice"
+              v-if="this.selectedDevice"
               id="checkEmergency"
               type="checkbox"
               v-model="toggle"
