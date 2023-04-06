@@ -70,13 +70,9 @@ export default {
         this.errorMessage = 'Por favor, preencha todos os campos.'
         return
       }
-      // const chaveCriptografia = 'minhaChaveDeCriptografia'
-      // const senhaCriptografada = CryptoJS.AES.encrypt(this.password, chaveCriptografia).toString()
-      // console.log('no cadastrop', senhaCriptografada)
       const encoder = new TextEncoder();
       const dadosCodificados = encoder.encode(this.password);
       const base64Codificado = btoa(String.fromCharCode(...dadosCodificados));
-      console.log('no cadastrop', base64Codificado)
 
       axios
         .post(
@@ -87,7 +83,6 @@ export default {
           },
         )
         .then(() => {
-          console.log('entrou')
           this.$router.push('/login')
         })
         .catch((error) => {
