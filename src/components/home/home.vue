@@ -63,6 +63,15 @@
             </span>
           </div>
         </div>
+        <div v-if="showModalConfirm" class="modal">
+          <div class="modal-content">
+            <p>O dispositivo {{ tempNovoDevice }} foi adicionado.</p>
+
+            <button @click="showModalConfirm = false">
+              Fechar
+            </button>
+          </div>
+        </div>
         <div class="blockEmergencia">
           <div class="emergenciaSquare">
             <img alt="" src="./../..\assets\icones\emergencia.png" />
@@ -302,6 +311,7 @@ export default {
       showModalAlertTemp: false,
       showModalEmergency: false,
       displayMessage: false,
+      showModalConfirm: false,
       response: '',
       toggle: false,
       alertaMin: '',
@@ -309,6 +319,7 @@ export default {
       selectedDevice: '',
       errorMessage: false,
       nomeDevice: '',
+      tempNovoDevice: '',
       novoDevice: '',
       devices: [],
     }
@@ -375,6 +386,7 @@ export default {
         })
     },
     addToListDevices() {
+      this.tempNovoDevice = this.novoDevice
       this.errorMessage = false
       if (this.novoDevice.length > 0) {
         axios.post('https://climatec.sp.skdrive.net/climatec/api/v1/device', {
@@ -385,14 +397,17 @@ export default {
       } else {
         this.errorMessage = true
       }
+      this.showModalConfirm = true
       this.attpage()
     },
     attpage() {
       setTimeout(() => {
         location.reload()
-      }, 2000)
+      }, 4000)
     },
   },
 }
 </script>
-<style lang="css" src="./home.css"></style>
+<style lang="css">
+  @import './home.css';
+</style>

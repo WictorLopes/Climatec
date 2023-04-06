@@ -74,7 +74,7 @@
               </a>
             </ul>
             <ul>
-              <a style="color: white; text-decoration: none;" href="#">Sair</a>
+              <a style="color: white; text-decoration: none;" href="/login">Sair</a>
             </ul>
           </li>
         </div>

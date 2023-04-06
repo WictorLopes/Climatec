@@ -3,17 +3,17 @@
     <div
       class="roundHome"
       :style="{
-        background: $route.path == '/' ? '#505050' : 'rgb(30, 30, 30)',
+        background: $route.path == '/home' ? '#505050' : 'rgb(30, 30, 30)',
       }"
       onmouseover="this.style.width='90px'; this.style.height='90px'; document.getElementById('textHome').style.display='block'"
       onmouseout="this.style.width='70px'; this.style.height='70px'; document.getElementById('textHome').style.display='none'"
     >
-      <a href="/">
+      <a href="/home">
         <img
           alt=""
           src="./../..\assets\icones\home.png"
           :style="{
-            filter: $route.path == '/' ? 'brightness(10)' : 'brightness(0.7)',
+            filter: $route.path == '/home' ? 'brightness(10)' : 'brightness(0.7)',
           }"
         />
       </a>
