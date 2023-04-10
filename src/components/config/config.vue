@@ -24,11 +24,19 @@
         </button>
         <div v-if="showModal" class="modal">
           <div class="modal-content">
-            <input
-              class="AddDevice"
-              v-model="novoDevice"
-              placeholder="Novo dispositivo"
-            />
+            <div style="display: flex; flex-direction: column;">
+              <input
+                class="AddDevice"
+                v-model="novoDevice"
+                placeholder="Novo dispositivo"
+              />
+              <input
+                style="margin-top: 10px;"
+                class="AddDevice"
+                v-model="novoCity"
+                placeholder="Cidade do dispositivo"
+              />
+            </div>
             <div
               style="display: flex; justify-content: space-around; margin: 15px; 0 15px 0"
             >
@@ -40,7 +48,7 @@
                   width: 92px;
                   height: 30px;
                 "
-                @click="addToListDevices"
+                @click="verifyCity"
               >
                 Salvar
               </button>
@@ -58,8 +66,13 @@
               </button>
             </div>
             <span style="color: red;" v-if="errorMessage">
-              Nome do dispositivo não pode ser em branco.
+              Por favor, preencha todos os campos.
             </span>
+            <p style="color: red;" v-if="cityNotFound">
+              Cidade não encontrada.
+              <br />
+              Por favor, verifique a ortografia.
+            </p>
           </div>
         </div>
         <div v-if="showModalConfirm" class="modal">
@@ -275,6 +288,7 @@ export default {
       showModalEdit: false,
       showModalAlerta: false,
       showModalConfirm: false,
+      cityNotFound: false,
       response: '',
       toggle: false,
       selectedDevice: '',
@@ -286,6 +300,8 @@ export default {
       novoDevice: '',
       tempNovoDevice: '',
       newNameDevice: '',
+      novoCity: '',
+
       devices: [],
     }
   },
@@ -350,19 +366,46 @@ export default {
       this.showModalRemove = false
       this.attpage()
     },
+    verifyCity() {
+      const url = 'https://api.opencagedata.com/geocode/v1/json'
+      const params = {
+        q: this.novoCity,
+        key: '962910487fa142e19394eb0facc173ba',
+      }
+      axios
+        .get(url, { params })
+        .then((response) => {
+          if (response.data.results.length > 0) {
+            // A cidade foi encontrada
+            this.cityNameValid = response.data.results[0].components.city
+            this.cityNotFound = false
+            this.addToListDevices()
+          } else {
+            // A cidade não foi encontrada
+            this.cityNameValid = null
+            this.cityNotFound = true
+          }
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
     addToListDevices() {
       this.tempNovoDevice = this.novoDevice
       this.errorMessage = false
-      if (this.novoDevice.length > 0) {
+      if (this.novoDevice.length > 0 && this.novoCity.length > 0) {
         axios.post('https://climatec.sp.skdrive.net/climatec/api/v1/device', {
           deviceName: this.novoDevice,
+          city: this.novoCity,
         })
+        this.novoCity = ''
+
         this.novoDevice = ''
         this.showModal = false
+        this.showModalConfirm = true
       } else {
         this.errorMessage = true
       }
-      this.showModalConfirm = true
       this.attpage()
     },
     changeToggle() {

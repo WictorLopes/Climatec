@@ -12,50 +12,55 @@
       />
     </div>
     <div style="display: flex; align-items: center;">
-      <img
-        v-if="
-          this.tempLocalCode >= 800 &&
-          this.tempLocalCode <= 803 &&
-          this.hourNow >= 6 &&
-          this.hourNow <= 17
-        "
-        alt=""
-        style="margin-right: 25px;"
-        src="../..\assets\icones\sol.png"
-      />
-      <img
-        v-else-if="
-          this.tempLocalCode >= 200 &&
-          this.tempLocalCode <= 751 &&
-          this.hourNow >= 0 &&
-          this.hourNow <= 23
-        "
-        alt=""
-        style="margin-right: 25px; width: 17%;"
-        src="../..\assets\icones\chuva.png"
-      />
-      <img
-        v-else-if="
-          this.tempLocalCode >= 800 ||
-          (this.tempLocalCode <= 803 && this.hourNow >= 18 && this.hourNow <= 5)
-        "
-        alt=""
-        style="margin-right: 25px;"
-        src="../..\assets\icones\noite.png"
-      />
-      <img
-        v-else
-        alt=""
-        style="margin-right: 25px; width: 25%;"
-        src="../..\assets\icones\nublado.png"
-      />
+      <div v-if="city" style="display: flex; align-items: center;">
+        <img
+          v-if="
+            this.tempLocalCode >= 800 &&
+            this.tempLocalCode <= 803 &&
+            this.hourNow >= 6 &&
+            this.hourNow <= 17
+          "
+          alt=""
+          style="margin-right: 25px;"
+          src="../..\assets\icones\sol.png"
+        />
+        <img
+          v-else-if="
+            this.tempLocalCode >= 200 &&
+            this.tempLocalCode <= 751 &&
+            this.hourNow >= 0 &&
+            this.hourNow <= 23
+          "
+          alt=""
+          style="margin-right: 25px; width: 17%;"
+          src="../..\assets\icones\chuva.png"
+        />
+        <img
+          v-else-if="
+            this.tempLocalCode >= 800 ||
+            (this.tempLocalCode <= 803 &&
+              this.hourNow >= 18 &&
+              this.hourNow <= 5)
+          "
+          alt=""
+          style="margin-right: 25px;"
+          src="../..\assets\icones\noite.png"
+        />
+        <img
+          v-else
+          alt=""
+          style="margin-right: 25px; width: 25%;"
+          src="../..\assets\icones\nublado.png"
+        />
 
-      <div style="display: flex; flex-direction: column;">
-        <span style="font-size: 30px; margin-right: 15px;">
-          {{ Math.floor(this.tempLocal) }}°C
-        </span>
-        <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
-        {{ this.city }}
+        <div style="display: flex; flex-direction: column;">
+          <span style="font-size: 30px; margin-right: 15px;">
+            {{ Math.floor(this.tempLocal) }}°C
+          </span>
+          <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
+          <span style="font-size: 16px;">{{ this.city }}</span>
+          {{ this.country }}
+        </div>
       </div>
       <div class="fotoPerfil">
         <img
@@ -74,7 +79,9 @@
               </a>
             </ul>
             <ul>
-              <a style="color: white; text-decoration: none;" href="/login">Sair</a>
+              <a style="color: white; text-decoration: none;" href="/login">
+                Sair
+              </a>
             </ul>
           </li>
         </div>
@@ -85,6 +92,13 @@
 <script>
 import axios from 'axios'
 export default {
+  props: {
+    city: {
+      type: String,
+      required: true,
+       default: '',
+    },
+  },
   name: 'HeaderPage',
   data: function () {
     return {
@@ -98,35 +112,33 @@ export default {
       country_code: '',
       latitude: '',
       longitude: '',
-      city: '',
+      devices: [],
+      country: '',
     }
   },
 
-  mounted() {
-    setTimeout(() => {
-      this.getCity()
-    }, 2000)
-
-    if (navigator.geolocation) {
-      this.local = navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude
-        this.longitude = position.coords.longitude
-      })
-    }
+  watch: {
+    city: function () {
+      this.getCountry()
+    },
   },
   methods: {
-    async getCity() {
-      const response = await axios.get(
-        'https://api.opencagedata.com/geocode/v1/json',
-        {
-          params: {
-            key: '962910487fa142e19394eb0facc173ba',
-            q: `${this.latitude}+${this.longitude}`,
-          },
-        },
-      )
-      this.city = response.data.results[0].components.city
-      this.country_code = response.data.results[0].components.country_code
+    async getCountry() {
+      const url = `https://api.opencagedata.com/geocode/v1/json?q=${this.city}&key=962910487fa142e19394eb0facc173ba`
+      try {
+        const response = await axios.get(url)
+        if (response.data.results.length > 0) {
+          this.cityInfo = response.data.results[0]
+          this.country = response.data.results[0].components.country
+          this.country_code = response.data.results[0].components.country_code
+          this.latitude = response.data.results[0].geometry.lat
+          this.longitude = response.data.results[0].geometry.lng
+        } else {
+          this.cityInfo = null
+        }
+      } catch (error) {
+        console.error(error)
+      }
       this.getTemp()
     },
     getTemp() {
