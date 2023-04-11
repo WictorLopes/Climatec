@@ -313,7 +313,7 @@ export default {
   },
   mounted() {
     axios
-      .get('https://climatec.sp.skdrive.net/climatec/api/v1/devices')
+      .get('http://localhost:8080/devices')
       .then((res) => {
         this.devices = res.data
       })
@@ -325,7 +325,7 @@ export default {
   methods: {
     getDeviceDatas(newID) {
       axios
-        .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
+        .get(`http://localhost:8080/devices/${newID}`)
         .then((res) => {
           this.alertaMin = res.data.data.alertMin
           this.alertaMax = res.data.data.alertMax
@@ -339,7 +339,7 @@ export default {
       if (this.newNameDevice.length > 0) {
         axios
           .put(
-            `https://climatec.sp.skdrive.net/climatec/api/v1/device/${this.selectedDevice}`,
+            `http://localhost:8080/device/${this.selectedDevice}`,
             {
               deviceName: this.newNameDevice,
             },
@@ -360,7 +360,7 @@ export default {
     deleteDevices() {
       axios
         .delete(
-          `https://climatec.sp.skdrive.net/climatec/api/v1/device/${this.selectedDevice}`,
+          `http://localhost:8080/device/${this.selectedDevice}`,
         )
         .then(() => true)
       this.showModalRemove = false
@@ -394,7 +394,7 @@ export default {
       this.tempNovoDevice = this.novoDevice
       this.errorMessage = false
       if (this.novoDevice.length > 0 && this.novoCity.length > 0) {
-        axios.post('https://climatec.sp.skdrive.net/climatec/api/v1/device', {
+        axios.post('http://localhost:8080/device', {
           deviceName: this.novoDevice,
           city: this.novoCity,
         })
@@ -413,7 +413,7 @@ export default {
     },
     minMaxAlert() {
       axios.post(
-        'https://climatec.sp.skdrive.net/climatec/api/v1/device/newAlert',
+        'http://localhost:8080/device/newAlert',
         {
           id: this.selectedDevice,
           alertMin: this.alertaMinimo,

@@ -74,7 +74,7 @@ export default {
       const base64Codificado = btoa(String.fromCharCode(...dadosCodificados))
       axios
         .post(
-          'https://node9870-climatec.sp.skdrive.net/climatec/api/v1/login',
+          'http://localhost:8080/login',
           {
             email: this.email,
             password: base64Codificado,
