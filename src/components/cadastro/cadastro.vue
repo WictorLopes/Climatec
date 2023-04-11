@@ -76,7 +76,7 @@ export default {
 
       axios
         .post(
-          'http://localhost:8080/register',
+          'https://climatec.sp.skdrive.net/climatec/api/v1/register',
           {
             email: this.email,
             password: base64Codificado,
