@@ -348,7 +348,7 @@ export default {
 
   mounted() {
     axios
-      .get('http://localhost:8080/devices')
+      .get('https://climatec.sp.skdrive.net/climatec/api/v1/devices')
       .then((res) => {
         this.devices = res.data
       })
@@ -387,7 +387,7 @@ export default {
       this.toggle = !this.toggle
       if (this.toggle) {
         axios.post(
-          `http://localhost:8080/sendEmail/${this.nomeDevice}`,
+          `https://climatec.sp.skdrive.net/climatec/api/v1/sendEmail/${this.nomeDevice}`,
         )
         this.showModalEmergency = true
       }
@@ -397,7 +397,7 @@ export default {
         this.toggle = !this.toggle
       }
       axios
-        .get(`http://localhost:8080/devices/${newID}`)
+        .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
         .then((res) => {
           this.status = res.data.data.statusSensor
           this.status_health = res.data.data.statusHealth
@@ -410,7 +410,7 @@ export default {
           console.log(error)
         })
       axios
-        .get(`http://localhost:8080/sensor/${newID}`)
+        .get(`https://climatec.sp.skdrive.net/climatec/api/v1/sensor/${newID}`)
         .then((res) => {
           this.response = res.data.data
           this.tempAtual = res.data.data[0].tempDegrees
@@ -429,7 +429,7 @@ export default {
       this.tempNovoDevice = this.novoDevice
       this.errorMessage = false
       if (this.novoDevice.length > 0 && this.novoCity.length > 0) {
-        axios.post('http://localhost:8080/device', {
+        axios.post('https://climatec.sp.skdrive.net/climatec/api/v1/device', {
           deviceName: this.novoDevice,
           city: this.novoCity,
         })
