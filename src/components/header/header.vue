@@ -58,7 +58,7 @@
             {{ Math.floor(this.tempLocal) }}°C
           </span>
           <span style="font-size: 16px;">{{ this.tempLocalDescription }}</span>
-          <span style="font-size: 16px;">{{ this.city }}</span>
+          <span style="font-size: 16px;">{{ this.city.charAt(0).toUpperCase() + this.city.slice(1) }}</span>
           {{ this.country }}
         </div>
       </div>

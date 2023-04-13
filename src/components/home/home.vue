@@ -84,6 +84,7 @@
             </button>
           </div>
         </div>
+
         <div class="blockEmergencia">
           <div class="emergenciaSquare">
             <img alt="" src="./../..\assets\icones\emergencia.png" />
@@ -336,6 +337,8 @@ export default {
       novoDevice: '',
       novoCity: '',
       devices: [],
+      apiLoaded: true,
+      city: '',
     }
   },
 
@@ -399,12 +402,14 @@ export default {
       axios
         .get(`https://climatec.sp.skdrive.net/climatec/api/v1/devices/${newID}`)
         .then((res) => {
+          this.apiLoaded = false
           this.status = res.data.data.statusSensor
           this.status_health = res.data.data.statusHealth
           this.alertaMin = res.data.data.alertMin
           this.alertaMax = res.data.data.alertMax
           this.nomeDevice = res.data.data.deviceName
           this.city = res.data.data.city
+          this.apiLoaded = true
         })
         .catch((error) => {
           console.log(error)
@@ -426,6 +431,8 @@ export default {
         })
     },
     addToListDevices() {
+      this.apiLoaded = false
+
       this.tempNovoDevice = this.novoDevice
       this.errorMessage = false
       if (this.novoDevice.length > 0 && this.novoCity.length > 0) {
@@ -440,6 +447,8 @@ export default {
       } else {
         this.errorMessage = true
       }
+      this.apiLoaded = true
+
       this.attpage()
     },
     attpage() {

@@ -94,11 +94,20 @@
       </div>
       <div v-else class="blocks">
         <div v-if="showModalEdit" class="modal">
-          <div class="modal-content">
+          <div
+            style="display: flex; flex-direction: column;"
+            class="modal-content"
+          >
             <input
               class="AddDevice"
               v-model="newNameDevice"
               placeholder="Editar dispositivo"
+            />
+            <input
+              style="margin-top: 10px;"
+              class="AddDevice"
+              v-model="novoCity"
+              :placeholder="city.charAt(0).toUpperCase() + city.slice(1)"
             />
             <div
               style="display: flex; justify-content: space-around; margin: 15px; 0 15px 0"
@@ -301,7 +310,7 @@ export default {
       tempNovoDevice: '',
       newNameDevice: '',
       novoCity: '',
-
+      city: '',
       devices: [],
     }
   },
@@ -329,6 +338,7 @@ export default {
         .then((res) => {
           this.alertaMin = res.data.data.alertMin
           this.alertaMax = res.data.data.alertMax
+          this.city = res.data.data.city
         })
         .catch((error) => {
           console.log(error)
@@ -342,6 +352,7 @@ export default {
             `https://climatec.sp.skdrive.net/climatec/api/v1/device/${this.selectedDevice}`,
             {
               deviceName: this.newNameDevice,
+              city: this.novoCity,
             },
           )
           .then((response) => {
